@@ -2,7 +2,8 @@
 export default function Home() {
   return (
     <div>
-      Home
+      Compiling State
+      keep clean
     </div>
   );
 }
