@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { RegisterUser } from "./_components/RegisterUser";
+import { RegisterUser } from "../../_global-components/RegisterUser";
 import { Button } from "@/app/_global-components/Button";
 
 const page = () => {
@@ -38,7 +38,7 @@ const page = () => {
         {/* Signup Form */}
         {showRegisterForm && (
           <div className="mt-6 w-full max-w-md">
-            <RegisterUser onRegisterUserSuccess={handleSignupSuccess} />
+            <RegisterUser onRegisterUserSuccess={handleSignupSuccess} role="user"/>
           </div>
         )}
       </div>
