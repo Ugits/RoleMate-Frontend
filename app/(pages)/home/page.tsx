@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { RegisterUser } from "./_components/RegisterUser";
+import { Button } from "@/app/_global-components/Button";
 
 const page = () => {
   const [showRegisterForm, setShowRegisterForm] = useState<boolean>(false);
@@ -22,15 +23,16 @@ const page = () => {
         </p>
       </div>
 
-      <div className="p-5 flex flex-col justify-center items-center">
+      <div className="flex flex-col justify-center items-center">
         <p className="text-slate-400">No Account...?</p>
         {/* Create New Account Button */}
-        <button
-          onClick={handleToggleSignupForm}
-          className="px-6 py-2 bg-green-500 hover:bg-green-600 text-white font-semibold rounded text-shadow-lg"
-        >
-          {showRegisterForm ? "Hide Register Form" : "Create New Account"}
-        </button>
+        <div onClick={handleToggleSignupForm}>
+          {showRegisterForm ? (
+            <Button title="Hide Register Form" color="darkolivegreen" />
+          ) : (
+            <Button title="Create New Account" color="darkolivegreen" />
+          )}
+        </div>
       </div>
       <div>
         {/* Signup Form */}

@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
+import { Button } from "./Button";
 
 export default function Header() {
   const router = useRouter();
@@ -24,16 +25,13 @@ export default function Header() {
   }, []);
 
   const handleTitleOnClick = () => {
-    router.push("/");
+    router.push("/home");
   };
 
   const handleLogin = () => {
     router.push("/login");
   };
 
-  const handleDashboard = () => {
-    router.push("/dashboard");
-  };
 
   return (
     <header className="bg-slate-950 text-gray-100 shadow-2xl">
@@ -55,23 +53,11 @@ export default function Header() {
         <div className="w-1/4 flex justify-end items-end space-x-4">
           {isLoggedIn ? (
             <div className="flex flex-row items-end">
-              <button
-                onClick={handleDashboard}
-                className="m-3 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded text-shadow-lg"
-              >
-                Dashboard
-              </button>
-              <div className="m-3 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded text-shadow-lg">
-                <p>logout</p>
-              </div>
+             <Button title="Dashboard" pushPath="/dashboard" color="indigo"/>
+             <Button title="Logout" pushPath="/home" color="crimson"/>
             </div>
           ) : (
-            <button
-              onClick={handleLogin}
-              className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded text-shadow-lg"
-            >
-              Login
-            </button>
+            <Button title="Login" pushPath="/login" color="darkolivegreen"/>
           )}
         </div>
       </div>
