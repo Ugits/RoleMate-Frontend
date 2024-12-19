@@ -67,6 +67,11 @@ const Login = () => {
         sessionStorage.setItem("accessToken", token);
         sessionStorage.setItem("role", role);
 
+        const event = new Event("authChange")
+        window.dispatchEvent(event)
+
+        router.push("/dashboard")
+
       })
       .catch((error) => {
         console.log(error);
