@@ -14,12 +14,8 @@ export const Button = ({ title, pushPath, color }: ButtonProps) => {
   const handleClick = () => {
     if (title === "Logout") {
       sessionStorage.clear();
-
       const event = new Event("authChange");
       window.dispatchEvent(event);
-
-      router.push("/home");
-      return;
     }
 
     if (!pushPath) return;
