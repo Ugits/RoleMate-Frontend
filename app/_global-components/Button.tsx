@@ -2,18 +2,27 @@
 
 import { useRouter } from "next/navigation";
 import { IUsername } from "../_types/IUsername";
+import { useEffect, useState } from "react";
 
 interface ButtonProps {
   title: string;
   color: string;
+  loading?: boolean 
   pushPath?: string;
   username?: string;
   onClick?: () => void;
 }
 
 export const Button = ({ title, pushPath, color, username, onClick }: ButtonProps) => {
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
-  const token = sessionStorage.getItem("accessToken");
+  const [token, setToken] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setToken(sessionStorage.getItem("accessToken"));
+    }
+  }, []);
 
   const handleClick = () => {
     if (title === "Logout") {
@@ -32,6 +41,8 @@ export const Button = ({ title, pushPath, color, username, onClick }: ButtonProp
       if (!window.confirm("Are you sure you want to delete this account?")) {
         return;
       }
+  
+      setLoading(true)
 
       //fetch
       fetch(`http://localhost:8080/user/delete-me`, {
@@ -64,16 +75,21 @@ export const Button = ({ title, pushPath, color, username, onClick }: ButtonProp
         })
         .catch((error) => {
           throw new Error("An error occurred while deleting the user.", error);
+        })
+        .finally(() => {
+          setLoading(false);
         });
       return;
     }
-
-    if (title === "Delete") {
-     const handleDeletion = onClick
-      if (handleDeletion) {
-        handleDeletion()
+    
+    if (["Delete", "Update", "Activate", "Deactivate"].includes(title)) {
+      if (onClick) {
+        onClick()
       }
     }
+
+
+
 
     if (!pushPath) return;
     router.push(`${pushPath}`);
@@ -82,10 +98,13 @@ export const Button = ({ title, pushPath, color, username, onClick }: ButtonProp
   return (
     <button
       onClick={handleClick}
+      disabled={loading}
       style={{ backgroundColor: color }}
-      className={`m-3 text-white px-4 py-2 rounded text-shadow-lg hover:opacity-80`}
+      className={`m-3 text-white px-4 py-2 rounded text-shadow-lg hover:opacity-80 ${
+        loading ? "opacity-50 cursor-not-allowed" : ""
+      }`}
     >
-      {title}
+      {loading ? "Loading..." : title}
     </button>
   );
 };

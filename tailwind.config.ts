@@ -12,23 +12,28 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      boxShadow: {
+        strong: "0 0px 30px 10px rgba(0, 0, 0, 0.9)",
+        innerStrong: " inset 0 0px 30px 10px rgba(0, 0, 0, 0.9)",
+        saberglow: "0 0px 1px 7px rgba(0, 0, 0, 0.9)",
+      },
     },
   },
   plugins: [
     function ({ addUtilities }) {
       const newTextShadows = {
-        '.text-shadow-sm': {
-          textShadow: '1px 1px 2px rgba(0, 0, 0, 0.3)',
+        ".text-shadow-sm": {
+          textShadow: "1px 1px 2px rgba(0, 0, 0, 0.3)",
         },
-        '.text-shadow': {
-          textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
+        ".text-shadow": {
+          textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
         },
-        '.text-shadow-lg': {
-          textShadow: '3px 3px 6px rgba(0, 0, 0, 0.7)',
+        ".text-shadow-lg": {
+          textShadow: "3px 3px 6px rgba(0, 0, 0, 0.7)",
         },
       };
 
-      addUtilities(newTextShadows, ['responsive', 'hover']);
-    }
+      addUtilities(newTextShadows, ["responsive", "hover"]);
+    },
   ],
 } satisfies Config;

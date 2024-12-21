@@ -2,21 +2,33 @@
 
 import { Button } from "@/app/_global-components/Button";
 import { IUsername } from "@/app/_types/IUsername";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const DeleteUser = () => {
   const [loading, setLoading] = useState<boolean>(false);
-  const [fieldData, setFormData] = useState<IUsername>({ username: "" });
-    const token = sessionStorage.getItem("accessToken")
+  const [inputData, setFormData] = useState<IUsername>({ username: "" });
+   const [token, setToken] = useState<string | null>(null);
+   
+     useEffect(() => {
+       if (typeof window !== "undefined") {
+         setToken(sessionStorage.getItem("accessToken"));
+       }
+     }, []);
 
   const handleDeletion = () => {
-    if (!fieldData.username.trim()) {
+    
+    if (!token) {
+      window.alert("Not Authenticated. Please Login");
+      return;
+    }
+    
+    if (!inputData.username.trim()) {
       alert("Please enter a username.");
       return;
     }
 
     if (
-      !window.confirm(`Are you sure you want to delete "${fieldData.username}"?`)
+      !window.confirm(`Are you sure you want to delete "${inputData.username}"?`)
     ) {
       return;
     }
@@ -29,7 +41,7 @@ export const DeleteUser = () => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify(fieldData),
+      body: JSON.stringify(inputData),
     })
       .then((response) => {
         if (!response.ok) {
@@ -59,13 +71,13 @@ export const DeleteUser = () => {
         <input
           type="text"
           id="username"
-          value={fieldData.username}
+          value={inputData.username}
           onChange={(e) => setFormData({ username: e.target.value })}
           required
           className="w-full px-3 py-2 border rounded focus:outline-none focus:ring text-sky-950"
         />
       </div>
-      <Button title="Delete" color="crimson" onClick={handleDeletion} />
+      <Button title="Delete" color="crimson" loading={loading} onClick={handleDeletion} />
     </div>
   );
 };

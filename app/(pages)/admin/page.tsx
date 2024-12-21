@@ -1,6 +1,7 @@
 import { Button } from "@/app/_global-components/Button";
 import { RegisterUser } from "@/app/_global-components/RegisterUser";
 import { DeleteUser } from "./_components/DeleteUser";
+import { UpdateUserStatus } from "./_components/UpdateUserStatus";
 
 const page = () => {
   return (
@@ -14,13 +15,8 @@ const page = () => {
          <DeleteUser/>
         </div>
         <div className="m-4">
-          <RegisterUser role="admin" />
+          <UpdateUserStatus/>
         </div>
-
-        
-       
-     
-
       </div>
     </div>
   );
