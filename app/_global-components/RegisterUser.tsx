@@ -57,7 +57,7 @@ export const RegisterUser = ({
   };
 
   return (
-    <div className="flex flex-col items-center mt-4 p-4 bg-slate-900 shadow-xl rounded-lg  border-green-500 border-4c text-shadow-lg">
+    <div className="flex flex-col items-center p-4 bg-slate-900 shadow-xl rounded-lg  border-rose-950 border-2 text-shadow-lg">
       <p className="mb-3">Create {role}</p>
       <form
         onSubmit={handleSignup}

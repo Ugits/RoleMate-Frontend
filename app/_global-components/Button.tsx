@@ -1,7 +1,6 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 import { IUsername } from "../_types/IUsername";
 
 interface ButtonProps {
@@ -9,10 +8,10 @@ interface ButtonProps {
   color: string;
   pushPath?: string;
   username?: string;
+  onClick?: () => void;
 }
 
-export const Button = ({ title, pushPath, color, username }: ButtonProps) => {
-  const [error, setError] = useState("");
+export const Button = ({ title, pushPath, color, username, onClick }: ButtonProps) => {
   const router = useRouter();
   const token = sessionStorage.getItem("accessToken");
 
@@ -30,11 +29,7 @@ export const Button = ({ title, pushPath, color, username }: ButtonProps) => {
         return;
       }
       //are u sure
-      const confirmed = window.confirm(
-        "Are you sure you want to delete this account?"
-      );
-
-      if (!confirmed) {
+      if (!window.confirm("Are you sure you want to delete this account?")) {
         return;
       }
 
@@ -71,6 +66,13 @@ export const Button = ({ title, pushPath, color, username }: ButtonProps) => {
           throw new Error("An error occurred while deleting the user.", error);
         });
       return;
+    }
+
+    if (title === "Delete") {
+     const handleDeletion = onClick
+      if (handleDeletion) {
+        handleDeletion()
+      }
     }
 
     if (!pushPath) return;
