@@ -1,5 +1,6 @@
-export const page = () => {
+const page = () => {
   return (
     <div>Host page</div>
   )
 }
+export default page;

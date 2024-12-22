@@ -4,7 +4,7 @@ const page = () => {
   return (
     <div>
       <div>Dashboard</div>
-      <Button title="Delete Me" color="crimson" pushPath="/home"/>
+      
     </div>
   );
 };
