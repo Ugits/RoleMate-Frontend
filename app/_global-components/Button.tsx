@@ -25,6 +25,10 @@ export const Button = ({ title, pushPath, color, username, onClick }: ButtonProp
   }, []);
 
   const handleClick = () => {
+   
+    if (loading) return;
+   
+
     if (title === "Logout") {
       sessionStorage.clear();
       const event = new Event("authChange");
@@ -84,7 +88,7 @@ export const Button = ({ title, pushPath, color, username, onClick }: ButtonProp
       return;
     }
     
-    if (["Delete", "Update", "Activate", "Deactivate"].includes(title)) {
+    if (["Delete", "Update", "Activate", "Deactivate", "Create Character"].includes(title)) {
       if (onClick) {
         onClick()
       }

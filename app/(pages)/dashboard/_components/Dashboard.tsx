@@ -1,7 +1,10 @@
-import React from 'react'
+import { CreateCharacter } from "./CreateCharacter";
 
 export const Dashboard = () => {
   return (
-    <div>Dashboard</div>
-  )
-}
+    <div>
+      <div>Dashboard</div>
+      <CreateCharacter />
+    </div>
+  );
+};
