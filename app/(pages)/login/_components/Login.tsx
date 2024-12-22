@@ -70,7 +70,9 @@ const Login = () => {
         const event = new Event("authChange")
         window.dispatchEvent(event)
 
-        router.push("/dashboard")
+        role.match("USER") && router.push("/user");
+        role.match("ADMIN") && router.push("/admin");
+
 
       })
       .catch((error) => {

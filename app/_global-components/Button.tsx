@@ -87,10 +87,7 @@ export const Button = ({ title, pushPath, color, username, onClick }: ButtonProp
         onClick()
       }
     }
-
-
-
-
+    
     if (!pushPath) return;
     router.push(`${pushPath}`);
   };
