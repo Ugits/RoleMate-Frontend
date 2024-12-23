@@ -2,15 +2,16 @@
 
 import { ICharacter } from "@/app/_types/ICharacter";
 import { ICharacterID } from "@/app/_types/ICharacterID";
-import { TrashIcon } from "@heroicons/react/24/outline"; // Adjust the path based on the Heroicons version
+import { TrashIcon } from "@heroicons/react/24/outline"; 
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 interface DeleteCharacterProps {
   character: ICharacter;
+  fetchCharacters: () => void
 }
 
-export const DeleteCharacter = ({ character }: DeleteCharacterProps) => {
+export const DeleteCharacter = ({ character, fetchCharacters }: DeleteCharacterProps) => {
   const [token, setToken] = useState<string | null>(null);
   const router = useRouter()
   useEffect(() => {
@@ -52,17 +53,14 @@ export const DeleteCharacter = ({ character }: DeleteCharacterProps) => {
         body: JSON.stringify(charToBeDeleted),
       })
         .then((response) => {
-          if (response.ok) {
-            return response.json();
-          } else {
+          if (!response.ok) {
             return response.json().then((errData) => {
               throw new Error(errData.message || "Failed to delete the character.");
             });
           }
-        })
-        .then((data) => {
+          
           alert(`Character "${character.name}" has been deleted successfully.`);
-          router.refresh();
+          fetchCharacters()
         })
         .catch((error) => {
           console.error("Error deleting character:", error);

@@ -1,15 +1,20 @@
-import { ICharacter } from "@/app/_types/ICharacter";
-import { CharacterCardMini } from "./CharacterCardMini";
+"use client";
 import { CreateCharacter } from "./CreateCharacter";
+import { CharacterList } from "./CharacterList";
+import { useState } from "react";
 
 export const Dashboard = () => {
-    const mockCharacter: ICharacter = {id:23, name:"Robel", level:7}
+  const [refresh, setRefresh] = useState<boolean>(false);
+
+  const handleRefresh = () => {
+    setRefresh((prev) => !prev);
+  };
+
   return (
-    <div>
-      <div>Dashboard</div>
-      <CreateCharacter />
-      // call List // call Charactercardmini inside
-      <CharacterCardMini character={mockCharacter}/>
+    <div className="p-6 bg-gray-200 min-h-screen">
+      <h1 className="text-4xl font-bold mb-6 text-center">Dashboard</h1>
+      <CreateCharacter onCharacterCreated={handleRefresh} />
+      <CharacterList refresh={refresh} />
     </div>
   );
 };

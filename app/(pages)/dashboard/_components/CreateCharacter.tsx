@@ -2,21 +2,27 @@
 
 import { Button } from "@/app/_global-components/Button";
 import { ICreateCharacter } from "@/app/_types/ICreateCharacter";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export const CreateCharacter = () => {
+interface CreateCharacterProps {
+  onCharacterCreated: () => void;
+}
+
+export const CreateCharacter = ({ onCharacterCreated }: CreateCharacterProps) => {
   const [inputData, setInputData] = useState<ICreateCharacter>({
     name: "",
-    level: 0,
+    level: 1,
   });
   const [loading, setLoading] = useState(false);
   const [token, setToken] = useState<string | null>(null);
-  
-    useEffect(() => {
-      if (typeof window !== "undefined") {
-        setToken(sessionStorage.getItem("accessToken"));
-      }
-    }, []);
+
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setToken(sessionStorage.getItem("accessToken"));
+    }
+  }, []);
 
   const handleCreate = async () => {
     if (!inputData.name.trim()) {
@@ -48,14 +54,16 @@ export const CreateCharacter = () => {
 
       const data = await response.json();
       alert(`Character "${data.name}" was created successfully!`);
-
-      setInputData({ name: "", level: 0 });
+      setInputData({ name: "", level: 1 });
       
+      onCharacterCreated();
     } catch (error) {
       console.error("Error creating character:", error);
     } finally {
       setLoading(false);
     }
+    
+    
   };
 
   return (
@@ -83,31 +91,31 @@ export const CreateCharacter = () => {
       </div>
       {/* Character Level Field */}
       <div className="mb-5 w-full">
-                <label htmlFor="level" className="block text-white mb-2">
-                    Character Level
-                </label>
-                <input
-                    type="number"
-                    id="level"
-                    min={1}
-                    max={9}
-                    value={inputData.level}
-                    onChange={(e) =>
-                        setInputData((prev) => ({
-                            ...prev,
-                            level: Number(e.target.value),
-                        }))
-                    }
-                    className="w-full px-4 py-3 border rounded focus:outline-none focus:ring focus:border-blue-300 text-sky-950"
-                />
-            </div>
-     {/* Submit Button */}
-     <Button
-                title={"Create Character"}
-                color="crimson"
-                onClick={handleCreate}
-                loading={loading}
-            />
+        <label htmlFor="level" className="block text-white mb-2">
+          Character Level
+        </label>
+        <input
+          type="number"
+          id="level"
+          min={1}
+          max={9}
+          value={inputData.level}
+          onChange={(e) =>
+            setInputData((prev) => ({
+              ...prev,
+              level: Number(e.target.value),
+            }))
+          }
+          className="w-full px-4 py-3 border rounded focus:outline-none focus:ring focus:border-blue-300 text-sky-950"
+        />
+      </div>
+      {/* Submit Button */}
+      <Button
+        title={"Create Character"}
+        color="crimson"
+        onClick={handleCreate}
+        loading={loading}
+      />
     </div>
   );
 };
