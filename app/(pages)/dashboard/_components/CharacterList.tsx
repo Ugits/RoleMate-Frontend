@@ -61,7 +61,7 @@ interface CharacterListProps {
   };
 
   return (
-    <div className="p-6 bg-gray-100 min-h-screen">
+    <div className="p-6 min-h-screen">
       <h1 className="text-3xl font-bold mb-6 text-center">Your Characters</h1>
 
       {/* Loading Indicator */}
@@ -76,7 +76,7 @@ interface CharacterListProps {
       )}
 
       {/* Characters Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
+      <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4 mt-6">
         {characters.map((character) => (
           <CharacterCardMini key={character.id} character={character} fetchCharacters={fetchCharacters}/>
         ))}
