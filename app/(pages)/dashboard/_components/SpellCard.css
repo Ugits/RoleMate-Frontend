@@ -1,0 +1,93 @@
+.spell-card {
+  position: relative;
+  width: 300px; 
+  height: 450px; 
+
+  background-image: url('/img/parchment-style-images-for-custom-notes-v0-q3lqg04jvm9b1.jpg'); 
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  border: 15px solid rgb(17, 13, 13);
+  border-top-left-radius: 55px;
+  border-top-right-radius: 20px;
+  border-bottom-left-radius: 20px; 
+  border-bottom-right-radius: 55px;
+
+  box-shadow: 
+    0 4px 8px rgba(0, 0, 0, 0.2);
+
+  overflow: hidden; 
+  display: flex;
+  flex-direction: column;
+  font-family: "Beleren Bold", "Garamond", serif; 
+  
+}
+
+.spell-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  margin-left: 20px;
+  
+  
+  color: rgb(0, 0, 0); 
+  position: relative;
+  top: 5px;
+}
+
+.spell-name {
+  font-size: 20px;
+  margin: 0; 
+}
+
+.spell-level {
+  background-color: rgba(255, 255, 255, 0.2);
+  font-size: 18px; 
+  padding: 3px 6px; 
+  border-radius: 4px;
+}
+
+.spell-image {
+  border: inset 2px black;
+  margin-left: 4%;
+  width: 92%; 
+  height: 200px; 
+  object-fit: cover;
+  display: block; 
+}
+
+.spell-type {
+  text-align: center; 
+  background-color: transparent;
+  font-weight: bold; 
+  color: #000;
+  padding: 5px 0; 
+  border-bottom: 1px solid #000; 
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.spell-description {
+  padding: 10px;
+  flex-grow: 1; 
+  font-size: 14px;
+  color: #333; 
+  background-color: transparent;
+  border-bottom: 1px solid #000;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.spell-flavor-text {
+  text-align: center;
+  padding: 10px; 
+  font-size: 12px; 
+  color: #303030; 
+  background-color: transparent; 
+  font-style: italic; 
+  margin-left: 10px;
+  margin-right: 10px;
+  border-bottom-left-radius: 30%;
+  border-bottom-right-radius: 30%;
+}

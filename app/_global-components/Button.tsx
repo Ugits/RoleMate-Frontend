@@ -77,7 +77,7 @@ export const Button = ({ title, pushPath, color, username, onClick }: ButtonProp
           const event = new Event("authChange");
           window.dispatchEvent(event);
 
-          router.push("/home")
+          router.push("/")
         })
         .catch((error) => {
           throw new Error("An error occurred while deleting the user.", error);

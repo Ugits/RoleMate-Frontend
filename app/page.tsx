@@ -1,189 +1,49 @@
-export default function Home() {
+"use client";
+import { useState } from "react";
+import { Button } from "@/app/_global-components/Button";
+import { RegisterUser } from "./_global-components/RegisterUser";
+
+const page = () => {
+  const [showRegisterForm, setShowRegisterForm] = useState<boolean>(false);
+
+  const handleToggleSignupForm = () => {
+    setShowRegisterForm((prev) => !prev);
+  };
+
+  const handleSignupSuccess = () => {
+    setShowRegisterForm(false);
+  };
+
   return (
-    <div className="flex flex-col justify-center bg-black h-screen w-screen">
-      <div className="flex flex-row justify-center items-center">
-        <div
-          className=" 
-          rounded-sm
-          h-80 w-1/3 m-6
-        border-yellow-500 border-4 
-        shadow-yellow-700 shadow-strong"
-        >
-          <div
-            className="
-             rounded-sm
-           h-full w-full
-        shadow-white shadow-saberglow"
-          >
-            <div
-              className="
-            
-           h-full w-full
-        shadow-yellow-700 shadow-innerStrong"
-            ></div>
-          </div>
-        </div>
-        <div
-          className=" 
-          rounded-sm
-          h-80 w-1/3 m-6
-        border-pink-500 border-4 
-        shadow-pink-700 shadow-strong"
-        >
-          <div
-            className="
-             rounded-sm
-           h-full w-full
-        shadow-white shadow-saberglow"
-          >
-            <div
-              className="
-            
-           h-full w-full
-        shadow-pink-700 shadow-innerStrong"
-            ></div>
-          </div>
-        </div>
-        <div
-          className=" 
-          rounded-sm
-          h-80 w-1/3 m-6
-        border-emerald-500 border-4 
-        shadow-emerald-700 shadow-strong"
-        >
-          <div
-            className="
-             rounded-sm
-           h-full w-full
-        shadow-white shadow-saberglow"
-          >
-            <div
-              className="
-            
-           h-full w-full
-        shadow-emerald-700 shadow-innerStrong"
-            ></div>
-          </div>
-        </div>
+    <main className="flex flex-col items-center justify-center pt-20 ">
+      <div className="text-center text-shadow-lg">
+        <h1 className="text-4xl font-bold mb-4">Welcome to RoleMate</h1>
+        <p className="text-base text-gray-700 mb-4">
+          Please log in to access your account details.
+        </p>
       </div>
 
-      <div
-        className="flex flex-col justify-center
-     bg-blue-500 h-3 my-20 
-     border-blue-500 border-y-4 
-     shadow-blue-700 shadow-strong"
-      >
-        <div
-          className="
-          bg-white h-[1px]
-        shadow-white shadow-saberglow"
-        ></div>
-      </div>
-
-      <div
-        className="flex flex-col justify-center
-     bg-red-500 h-3 my-20 
-     border-red-500 border-y-4 
-     shadow-red-700 shadow-strong"
-      >
-        {" "}
-        <div
-          className="
-      bg-white h-[1px]
-      shadow-white shadow-saberglow"
-        ></div>
-      </div>
-
-      <div
-        className="flex flex-col justify-center
-     bg-green-500 h-3 my-20 
-     border-green-500 border-y-4 
-     shadow-green-700 shadow-strong"
-      >
-        {" "}
-        <div
-          className="
-      bg-white h-[1px]
-      shadow-white shadow-saberglow"
-        ></div>
-      </div>
-      <div className="flex flex-row justify-center items-center">
-        <div
-          className=" 
-          rounded-sm rounded-tr-full
-          h-80 w-1/3 mx-6
-        border-blue-500 border-4 
-        shadow-blue-700 shadow-strong"
-          
-        >
-          <div
-            className="         
-             rounded-sm
-             rounded-es-full
-           h-full w-full
-        shadow-white shadow-saberglow"
-          >
-            <div
-            className="
-             rounded-md rounded-es-full
-           h-full w-full
-        shadow-blue-700 shadow-innerStrong"
-          >
-          </div>
-          </div>
-          
-        </div>
-        <div
-          className=" 
-          rounded-sm rounded-tr-full
-          h-80 w-1/3 mx-6
-        border-fuchsia-500 border-4 
-        shadow-fuchsia-700 shadow-strong"
-          
-        >
-          <div
-            className="         
-             rounded-sm
-             rounded-es-full
-           h-full w-full
-        shadow-white shadow-saberglow"
-          >
-            <div
-            className="
-             rounded-md rounded-es-full
-           h-full w-full
-        shadow-fuchsia-700 shadow-innerStrong"
-          >
-          </div>
-          </div>
-          
-        </div>
-        <div
-          className=" 
-          rounded-sm rounded-tr-full
-          h-80 w-1/3 mx-6
-        border-orange-500 border-4 
-        shadow-orange-700 shadow-strong"
-          
-        >
-          <div
-            className="         
-             rounded-sm
-             rounded-es-full
-           h-full w-full
-        shadow-white shadow-saberglow"
-          >
-            <div
-            className="
-             rounded-md rounded-es-full
-           h-full w-full
-        shadow-orange-700 shadow-innerStrong"
-          >
-          </div>
-          </div>
-          
+      <div className="flex flex-col justify-center items-center">
+        <p className="text-slate-400">No Account...?</p>
+        {/* Create New Account Button */}             {/*TODO CHANGE BUTTON TO CUSTOM BUTTON.TSX*/}
+        <div onClick={handleToggleSignupForm}>
+          {showRegisterForm ? (
+            <Button title="Hide Register Form" color="darkolivegreen" />
+          ) : (
+            <Button title="Create New Account" color="darkolivegreen" />
+          )}
         </div>
       </div>
-    </div>
+      <div>
+        {/* Signup Form */}
+        {showRegisterForm && (
+          <div className="mt-6 w-full max-w-md">
+            <RegisterUser onRegisterUserSuccess={handleSignupSuccess} role="user"/>
+          </div>
+        )}
+      </div>
+    </main>
   );
-}
+};
+
+export default page;

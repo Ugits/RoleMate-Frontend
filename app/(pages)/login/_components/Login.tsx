@@ -89,7 +89,7 @@ const Login = () => {
   }
 
   return (
-    <div className="p-8 border-2 bg-slate-600 ">
+    <div className="flex flex-col items-center p-4 bg-slate-900 shadow-xl rounded-lg  border-rose-950 border-2 text-shadow-lg">
 
       <form onSubmit={handleSubmit} className="w-full max-w-sm text-shadow-lg">
         <div className="flex flex-col space-y-4">
@@ -106,7 +106,7 @@ const Login = () => {
               placeholder="Enter your username"
               aria-label="Username"
               required
-              className="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring focus:ring-blue-300 text-sky-950"
+              className="w-full px-3 py-2 border rounded focus:outline-none focus:ring text-sky-950"
             />
           </div>
 
@@ -123,7 +123,7 @@ const Login = () => {
               placeholder="Enter your password"
               aria-label="Password"
               required
-              className="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring focus:ring-blue-300 text-sky-950"
+              className="w-full px-3 py-2 border rounded focus:outline-none focus:ring text-sky-950"
             />
           </div>
         </div>

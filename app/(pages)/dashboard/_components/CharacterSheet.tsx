@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ICharacterID } from "@/app/_types/ICharacterID";
 import { NumericCharacterField } from "@/app/_types/ICreateCharacter";
+import SpellList from "./SpellList";
 
 export interface ICharacter {
   id: number;
@@ -29,6 +30,7 @@ const CharacterSheet = ({ characterId }: CharacterSheetProps) => {
   const [updating, setUpdating] = useState<boolean>(false);
   const [updateError, setUpdateError] = useState<string | null>(null);
   const [updateSuccess, setUpdateSuccess] = useState<string | null>(null);
+  const [isOverlayOpen, setIsOverlayOpen] = useState(false);
 
   useEffect(() => {
     const fetchCharacter = async () => {
@@ -147,7 +149,6 @@ const CharacterSheet = ({ characterId }: CharacterSheetProps) => {
     }
 
     try {
-      console.log("Submitting Updated Character Data:", character); // Debugging
 
       const response = await fetch("http://localhost:8080/character/update", {
         method: "PUT",
@@ -423,24 +424,6 @@ const CharacterSheet = ({ characterId }: CharacterSheetProps) => {
           </div>
         </div>
 
-        {/* Additional Fields (if any) */}
-        {/* 
-        <div className="border w-full flex flex-row p-4 mb-4">
-          <div className="border w-full border-green-500 flex flex-col">
-            <div>a</div>
-            <div>b</div>
-            <div>c</div>
-            <div>d</div>
-          </div>
-          <div className="border w-full border-red-600 flex flex-col">
-            <div>a</div>
-            <div>b</div>
-            <div>c</div>
-            <div>d</div>
-          </div>
-        </div>
-        */}
-
         {/* Submit Button and Feedback */}
         <div className="w-full flex flex-col items-center">
           {updateError && (
@@ -456,8 +439,34 @@ const CharacterSheet = ({ characterId }: CharacterSheetProps) => {
           >
             {updating ? "Updating..." : "Update Character"}
           </button>
+          <div className="my-4">
+            <button
+              type="button"
+              className="mt-2 px-4 py-2 bg-indigo-900 text-white rounded-full hover:bg-indigo-600"
+              onClick={() => setIsOverlayOpen(true)}
+            >
+              View Spells
+            </button>
+          </div>
         </div>
       </form>
+      {/* Overlay */}
+      {isOverlayOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex flex-col-reverse justify-center items-center z-50">
+          <div className="bg-black bg-opacity-50 p-6 rounded-lg w-3/4 h-3/4 overflow-auto relative">
+
+            {/* SpellList component */}
+            <SpellList characterLevel={{ level: character.level }} />
+          </div>
+            {/* Close button */}
+            <button
+              onClick={() => setIsOverlayOpen(false)}
+              className="m-4 top-4 right-4 px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600"
+            >
+              Close
+            </button>
+        </div>
+      )}
     </div>
   );
 };

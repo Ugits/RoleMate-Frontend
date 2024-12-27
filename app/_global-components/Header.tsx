@@ -25,7 +25,7 @@ export default function Header() {
   }, []);
 
   const handleTitleOnClick = () => {
-    router.push("/home");
+    router.push("/");
   };
 
   const handleLogin = () => {
@@ -54,7 +54,7 @@ export default function Header() {
           {isLoggedIn ? (
             <div className="flex flex-row items-end">
               <Button title="Dashboard" pushPath="/dashboard" color="indigo"/>
-              <Button title="Logout" pushPath="/home" color="crimson"/>
+              <Button title="Logout" pushPath="/" color="crimson"/>
             </div>
           ) : (
             <Button title="Login" pushPath="/login" color="darkolivegreen"/>
