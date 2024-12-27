@@ -38,7 +38,7 @@ export default function Header() {
       <div className="flex items-center py-4 px-6">
         {/* Left Spacer */}
         <div className="w-1/4"></div>
-
+  
         {/* Title Centered */}
         <div className="w-2/4 flex justify-center">
           <h1
@@ -48,13 +48,13 @@ export default function Header() {
             RoleMate
           </h1>
         </div>
-
+  
         {/* Buttons on the Right */}
         <div className="w-1/4 flex justify-end items-end space-x-4">
           {isLoggedIn ? (
             <div className="flex flex-row items-end">
-             <Button title="Dashboard" pushPath="/dashboard" color="indigo"/>
-             <Button title="Logout" pushPath="/home" color="crimson"/>
+              <Button title="Dashboard" pushPath="/dashboard" color="indigo"/>
+              <Button title="Logout" pushPath="/home" color="crimson"/>
             </div>
           ) : (
             <Button title="Login" pushPath="/login" color="darkolivegreen"/>
@@ -64,3 +64,4 @@ export default function Header() {
     </header>
   );
 }
+

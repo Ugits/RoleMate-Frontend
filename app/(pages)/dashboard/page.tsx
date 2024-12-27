@@ -1,12 +1,8 @@
-import { Button } from "@/app/_global-components/Button";
-import { Dashboard } from "./_components/Dashboard";
+import Dashboard from "./_components/Dashboard";
 
-const page = () => {
-  return (
-    <div>
-      <Dashboard />
-    </div>
-  );
+
+const Page = () => {
+  return <Dashboard />;
 };
 
-export default page;
+export default Page;

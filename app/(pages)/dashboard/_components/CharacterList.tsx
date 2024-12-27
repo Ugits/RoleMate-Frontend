@@ -3,13 +3,15 @@
 import { useEffect, useState } from "react";
 import { CharacterCardMini } from "./CharacterCardMini";
 import { ICharacter } from "@/app/_types/ICharacter";
+import { ICharacterID } from "@/app/_types/ICharacterID";
 
 
 interface CharacterListProps {
     refresh: boolean;
+    onCharacterSelect: (characterId: ICharacterID) => void;
   }
 
-  export const CharacterList = ({ refresh }: CharacterListProps) => {
+  export const CharacterList = ({ refresh, onCharacterSelect }: CharacterListProps) => {
   const [characters, setCharacters] = useState<ICharacter[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -78,7 +80,11 @@ interface CharacterListProps {
       {/* Characters Grid */}
       <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4 mt-6">
         {characters.map((character) => (
-          <CharacterCardMini key={character.id} character={character} fetchCharacters={fetchCharacters}/>
+          <CharacterCardMini 
+          key={character.id} 
+          character={character} 
+          onSelect={() => onCharacterSelect({ id: character.id })}
+          fetchCharacters={fetchCharacters}/>
         ))}
       </div>
     </div>

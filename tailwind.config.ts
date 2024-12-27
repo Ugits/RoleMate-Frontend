@@ -17,6 +17,9 @@ export default {
         innerStrong: " inset 0 0px 30px 10px rgba(0, 0, 0, 0.9)",
         saberglow: "0 0px 1px 7px rgba(0, 0, 0, 0.9)",
       },
+      backgroundImage: {
+        'character-sheet': "url('/img/parchment.png')",
+      },
     },
   },
   plugins: [

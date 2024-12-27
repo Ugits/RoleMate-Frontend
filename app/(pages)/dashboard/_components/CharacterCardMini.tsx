@@ -2,16 +2,18 @@
 
 import { ICharacter } from "@/app/_types/ICharacter";
 import { DeleteCharacter } from "./DeleteCharacter";
-import React, { FC } from "react";
 
 interface CharacterCardMiniProps {
   character: ICharacter;
+  onSelect: () => void
   fetchCharacters: () => void
 }
 
-export const CharacterCardMini = ({character, fetchCharacters}: CharacterCardMiniProps) => {
+export const CharacterCardMini = ({character, fetchCharacters, onSelect}: CharacterCardMiniProps) => {
   return (
-    <div className="flex flex-row justify-between p-4 bg-white rounded shadow-md hover:shadow-lg transition-shadow duration-300">
+    <div 
+    onClick={onSelect}
+    className="flex flex-row justify-between p-4 bg-white rounded shadow-md hover:shadow-lg transition-shadow duration-300">
       {/* Character Details */}
       <div>
         <h3 className="text-lg font-semibold text-gray-800">

@@ -2,7 +2,6 @@
 
 import { Button } from "@/app/_global-components/Button";
 import { ICreateCharacter } from "@/app/_types/ICreateCharacter";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 interface CreateCharacterProps {

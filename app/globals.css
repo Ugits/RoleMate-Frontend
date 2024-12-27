@@ -5,14 +5,14 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --background-image: url('/resources/img/woo-chul-lee-11.jpg');
+  --background-image: url('/img/woo-chul-lee-11.jpg');
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #1e293b;
     --foreground: #ededed;
-     --background-image: url('/resources/img/woo-chul-lee-11.jpg');
+     --background-image: url('/img/woo-chul-lee-11.jpg');
   }
 }
 
