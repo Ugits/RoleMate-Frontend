@@ -3,7 +3,7 @@
 import { ICharacter } from "@/app/_types/ICharacter";
 import { ICharacterID } from "@/app/_types/ICharacterID";
 import { TrashIcon } from "@heroicons/react/24/outline"; 
-import { useRouter } from "next/navigation";
+
 import { useEffect, useState } from "react";
 
 interface DeleteCharacterProps {
@@ -13,14 +13,16 @@ interface DeleteCharacterProps {
 
 export const DeleteCharacter = ({ character, fetchCharacters }: DeleteCharacterProps) => {
   const [token, setToken] = useState<string | null>(null);
-  const router = useRouter()
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       setToken(sessionStorage.getItem("accessToken"));
     }
   }, []);
 
-  const handleDeletion = async () => {
+  const handleDeletion = async (event: React.MouseEvent) => {
+
+    event.stopPropagation();
 
     if (!token) {
       alert("You must be logged in to delete a character.");
