@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { ICharacterID } from "@/app/_types/ICharacterID";
 import { NumericCharacterField } from "@/app/_types/ICreateCharacter";
 import SpellList from "./SpellList";
+import { BASE_URL } from "@/variable.env";
 
 export interface ICharacter {
   id: number;
@@ -44,7 +45,7 @@ const CharacterSheet = ({ characterId }: CharacterSheetProps) => {
       }
 
       try {
-        const response = await fetch("http://localhost:8080/character/fetch", {
+        const response = await fetch(`${BASE_URL}/character/fetch`, {
           method: "POST",
           credentials: "include",
           headers: {
@@ -150,7 +151,7 @@ const CharacterSheet = ({ characterId }: CharacterSheetProps) => {
 
     try {
 
-      const response = await fetch("http://localhost:8080/character/update", {
+      const response = await fetch(`${BASE_URL}/character/update`, {
         method: "PUT",
         credentials: "include",
         headers: {

@@ -3,6 +3,7 @@
 import { Button } from "@/app/_global-components/Button";
 import { IUpdateUserStatus } from "@/app/_types/IUpdateUserStatus";
 import { IUsername } from "@/app/_types/IUsername";
+import { BASE_URL } from "@/variable.env";
 import { useEffect, useState } from "react";
 
 export const UpdateUserStatus = () => {
@@ -59,7 +60,7 @@ export const UpdateUserStatus = () => {
 
     setLoading(true);
 
-    fetch(`http://localhost:8080/admin/user/status`, {
+    fetch(`${BASE_URL}/admin/user/status`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

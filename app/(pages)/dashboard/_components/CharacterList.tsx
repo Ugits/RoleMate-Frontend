@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { CharacterCardMini } from "./CharacterCardMini";
 import { ICharacter } from "@/app/_types/ICharacter";
 import { ICharacterID } from "@/app/_types/ICharacterID";
+import { BASE_URL } from "@/variable.env";
 
 
 interface CharacterListProps {
@@ -33,7 +34,7 @@ interface CharacterListProps {
       return;
     }
 
-    fetch("http://localhost:8080/character/fetch-all", {
+    fetch(`${BASE_URL}/character/fetch-all`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

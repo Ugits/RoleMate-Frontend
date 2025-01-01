@@ -5,6 +5,7 @@ import {
   ICreateCharacter,
   NumericCharacterField,
 } from "@/app/_types/ICreateCharacter";
+import { BASE_URL } from "@/variable.env";
 import { useEffect, useState } from "react";
 
 interface CreateCharacterProps {
@@ -90,7 +91,7 @@ export const CreateCharacter = ({
 
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:8080/character/create", {
+      const response = await fetch(`${BASE_URL}/character/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

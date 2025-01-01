@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { ICharacterLevel } from "@/app/_types/ICharacterLevel";
 import { ISpell } from "@/app/_types/ISpell";
 import SpellCard from "./SpellCard";
+import { BASE_URL } from "@/variable.env";
 
 interface SpellListProps {
   characterLevel: ICharacterLevel;
@@ -22,7 +23,7 @@ export const SpellList = ({ characterLevel }: SpellListProps) => {
     setError(null);
     setSpells([]);
 
-    fetch("http://localhost:8080/api/spell/level", {
+    fetch(`${BASE_URL}/api/spell/level`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

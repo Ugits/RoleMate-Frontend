@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { IUser } from "../../../_types/IUser";
 import { IAuthResponse } from "../../../_types/IAuthResponse";
+import { BASE_URL } from "@/variable.env";
 
 const Login = () => {
   const [user, setUser] = useState<IUser>({ username: "", password: "" });
@@ -35,7 +36,7 @@ const Login = () => {
       controller.abort();
     }, timeout);
 
-    fetch("http://localhost:8080/auth/login", {
+    fetch(`${BASE_URL}/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

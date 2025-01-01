@@ -2,6 +2,7 @@
 
 import { Button } from "@/app/_global-components/Button";
 import { IUsername } from "@/app/_types/IUsername";
+import { BASE_URL } from "@/variable.env";
 import { useEffect, useState } from "react";
 
 export const DeleteUser = () => {
@@ -35,7 +36,7 @@ export const DeleteUser = () => {
 
     setLoading(true);
 
-    fetch(`http://localhost:8080/admin/user/delete`, {
+    fetch(`${BASE_URL}/admin/user/delete`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

@@ -2,7 +2,8 @@
 
 import { ISignupRequest } from "@/app/_types/IRegisterRequest";
 import { ISignupResponse } from "@/app/_types/ISignupResponse";
-import { useState } from "react";
+import { BASE_URL } from "@/variable.env";
+import { useEffect, useState } from "react";
 
 interface RegisterUserProps {
   onRegisterUserSuccess?: () => void;
@@ -20,49 +21,85 @@ export const RegisterUser = ({
   const [error, setError] = useState("");
   const [loading, setLoading] = useState<boolean>(false);
   const dynamicRole = role;
+  const [token, setToken] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setToken(sessionStorage.getItem("accessToken"));
+    }
+  }, []);
 
   const handleSignup = (event: React.FormEvent) => {
     event.preventDefault();
 
     setLoading(true);
     setError("");
-
-    fetch(`http://localhost:8080/${dynamicRole}/register`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(user),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          return response.json().then((errData) => {
-            setError(errData.message || "Signup failed. Please try again.");
-            throw new Error(errData.message);
+    {
+      if (dynamicRole === "admin") {
+        fetch(`${BASE_URL}/${dynamicRole}/register`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(user),
+        })
+          .then((response) => {
+            if (!response.ok) {
+              return response.json().then((errData) => {
+                setError(errData.message || "Signup failed. Please try again.");
+                throw new Error(errData.message);
+              });
+            }
+            return response.json();
+          })
+          .then((data: ISignupResponse) => {
+            alert("Account created successfully!");
+            if (onRegisterUserSuccess) onRegisterUserSuccess();
+          })
+          .catch((err) => {
+            setError(err.message || "An error occurred. Please try again.");
+            console.error(err);
+          })
+          .finally(() => {
+            setLoading(false);
           });
-        }
-        return response.json();
-      })
-      .then((data: ISignupResponse) => {
-        alert("Account created successfully!");
-        if (onRegisterUserSuccess) onRegisterUserSuccess();
-      })
-      .catch((err) => {
-        setError(err.message || "An error occurred. Please try again.");
-        console.error(err);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+      } else {
+        fetch(`${BASE_URL}/${dynamicRole}/register`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(user),
+        })
+          .then((response) => {
+            if (!response.ok) {
+              return response.json().then((errData) => {
+                setError(errData.message || "Signup failed. Please try again.");
+                throw new Error(errData.message);
+              });
+            }
+            return response.json();
+          })
+          .then((data: ISignupResponse) => {
+            alert("Account created successfully!");
+            if (onRegisterUserSuccess) onRegisterUserSuccess();
+          })
+          .catch((err) => {
+            setError(err.message || "An error occurred. Please try again.");
+            console.error(err);
+          })
+          .finally(() => {
+            setLoading(false);
+          });
+      }
+    }
   };
 
   return (
     <div className="flex flex-col items-center p-4 bg-slate-900 shadow-xl rounded-lg  border-rose-950 border-2 text-shadow-lg">
       <p className="mb-3">Create {role}</p>
-      <form
-        onSubmit={handleSignup}
-       
-      >
+      <form onSubmit={handleSignup}>
         {/* Error Message */}
         {error && (
           <p className="text-red-500 mb-2" role="alert" aria-live="assertive">

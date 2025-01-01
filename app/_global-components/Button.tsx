@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { IUsername } from "../_types/IUsername";
 import { useEffect, useState } from "react";
+import { BASE_URL } from "@/variable.env";
 
 interface ButtonProps {
   title: string;
@@ -49,7 +50,7 @@ export const Button = ({ title, pushPath, color, username, onClick }: ButtonProp
       setLoading(true)
 
       //fetch
-      fetch(`http://localhost:8080/user/delete-me`, {
+      fetch(`${BASE_URL}/user/delete-me`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

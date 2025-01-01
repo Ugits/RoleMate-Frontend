@@ -2,6 +2,7 @@
 
 import { ICharacter } from "@/app/_types/ICharacter";
 import { ICharacterID } from "@/app/_types/ICharacterID";
+import { BASE_URL } from "@/variable.env";
 import { TrashIcon } from "@heroicons/react/24/outline"; 
 
 import { useEffect, useState } from "react";
@@ -46,7 +47,7 @@ export const DeleteCharacter = ({ character, fetchCharacters }: DeleteCharacterP
     const charToBeDeleted: ICharacterID = {id: character.id}
 
 
-    fetch(`http://localhost:8080/character/delete`, {
+    fetch(`${BASE_URL}/character/delete`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
